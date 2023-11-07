@@ -99,3 +99,37 @@ playerCards.forEach((card) => {
 // suitIndicators.forEach((indicator) => {
 //     indicator.addEventListener('click', switchSuitColors);
 // });
+
+
+
+// const suitColumns = document.querySelectorAll('.suit-column');
+
+// suitColumns.forEach((suitColumn) => {
+//     const playerColorIndicators = suitColumn.nextElementSibling.querySelectorAll('.color-indicator');
+//     let colors = ['color-1', 'color-2', 'color-3'];
+//     let colorIndex = 0;
+
+//     playerColorIndicators.forEach((indicator) => {
+//         indicator.addEventListener('click', () => {
+//             indicator.classList.remove(colors[colorIndex]);
+//             colorIndex = (colorIndex + 1) % colors.length;
+//             indicator.classList.add(colors[colorIndex]);
+
+//             // Call a function to synchronize colors across all players for the same suit
+//             synchronizeColors(suitColumn.classList[1], colors[colorIndex]);
+//         });
+//     });
+// });
+
+// // Function to synchronize indicator colors for the same suit across all players
+// function synchronizeColors(suitType, color) {
+//     const suitColumns = document.querySelectorAll(`.${suitType}`);
+
+//     suitColumns.forEach((column) => {
+//         const playerColorIndicators = column.nextElementSibling.querySelectorAll('.color-indicator');
+//         playerColorIndicators.forEach((indicator) => {
+//             indicator.classList.remove('color-3', 'color-2', 'color-1');
+//             indicator.classList.add(color);
+//         });
+//     });
+// }

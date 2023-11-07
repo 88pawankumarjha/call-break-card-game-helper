@@ -5,11 +5,11 @@ body {
     background-color: #f7f7f7;
 }
 
-header {
+footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 0.5rem 0;
+    padding: 1px 0;
 }
 
 main {
@@ -35,18 +35,21 @@ main {
     flex-basis: 20%; /* Four columns for each player */
 }
 
-.suit-column {
+/* .suit-column {
+    
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Allow the suit column to grow */
-}
+    
+    min-height: 200px;
+} */
+
 
 
 .card {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 3px;
-    padding: 1vh 0.2rem;
+    padding: 0 0.2rem;
     margin: 0.5rem 0;
     text-align: center;
     min-width: 30px;
@@ -94,3 +97,33 @@ main {
 .suit-indicator .color-3 {
     background-color: green;
 } */
+
+.color-indicator {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.color-indicator .color-1 {
+    background-color: green; /* Initial color for color-1 */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color-indicator .color-2 {
+    background-color: yellow; /* Initial color for color-2 */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color-indicator .color-3 {
+    background-color: red; /* Initial color for color-3 */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
