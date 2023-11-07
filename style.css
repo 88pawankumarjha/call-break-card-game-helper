@@ -5,11 +5,19 @@ body {
     background-color: #f7f7f7;
 }
 
-footer {
+header, footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 1px 0;
+}
+header {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: x-large;
+    justify-content: center;
 }
 
 main {
@@ -35,27 +43,27 @@ main {
     flex-basis: 20%; /* Four columns for each player */
 }
 
-/* .suit-column {
-    
+.suit-column {
     display: flex;
     flex-direction: column;
-    
-    min-height: 200px;
-} */
-
-
+    height: 100%; /* Fixed height */
+    flex-grow: 1; /* Allow the suit column to grow in width */
+    max-width: 100%; /* Set a maximum width for suit-column */
+    min-width: 1px; /* Set a maximum width for suit-column */
+    overflow: hidden; /* Hide the overflow content if the container is too small */
+}
 
 .card {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 3px;
-    padding: 0 0.2rem;
+    padding: 0;
     margin: 0.5rem 0;
     text-align: center;
-    min-width: 30px;
+    min-width: 20px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    font-size: 12px;
+    font-size: 13px;
     flex: 1; /* Cards take up available space */
 }
 
@@ -72,58 +80,24 @@ main {
     color: black;
 }
 
-/* 
-.suit-indicator {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.2rem;
+.highlighted {
+    background-color: yellowgreen;
 }
 
-.suit-indicator div {
-    width: 30px;
-    height: 5px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+.highlighted1 {
+    background-color: orange;
+}
+.noHighlight {
+    background-color: #3498db;
 }
 
-.suit-indicator .color-1 {
-    background-color: red;
-}
-
-.suit-indicator .color-2 {
-    background-color: blue;
-}
-
-.suit-indicator .color-3 {
-    background-color: green;
-} */
-
-.color-indicator {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-}
-
-.color-indicator .color-1 {
-    background-color: green; /* Initial color for color-1 */
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.color-indicator .color-2 {
-    background-color: yellow; /* Initial color for color-2 */
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.color-indicator .color-3 {
-    background-color: red; /* Initial color for color-3 */
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
+button {
+    background-color: #3498db; /* Background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s ease; 
 }

@@ -26,9 +26,6 @@ for (let i = 0; i < numberOfPlayers; i++) {
 function appendCardsToContainer(playerIndex, cards) {
     const containerId = `player${playerIndex + 1}-cards`;
     const cardContainer = document.getElementById(containerId);
-
-    const suits = ['♠', '♥', '♣', '♦'];
-
     suits.forEach((suit) => {
         const suitCards = cards.filter((card) => card.suit === suit);
         if (suitCards.length > 0) {
@@ -65,6 +62,13 @@ function hideCard(cardElement) {
     // Select and remove all cards with the common class from all players
     const commonClass = 'card';
     const playerCards = document.querySelectorAll(`.${commonClass}`);
+    const countSpades = document.getElementById('countSpades');
+    const countHearts = document.getElementById('countHearts');
+    const countClubs = document.getElementById('countClubs');
+    const countDiamonds = document.getElementById('countDiamonds');
+
+    cardElement.innerHTML.includes('♠') ? countSpades.innerHTML=countSpades.innerHTML-1: cardElement.innerHTML.includes('♥') ? countHearts.innerHTML=countHearts.innerHTML-1 : cardElement.innerHTML.includes('♣') ? countClubs.innerHTML=countClubs.innerHTML-1 : countDiamonds.innerHTML=countDiamonds.innerHTML-1;
+
     playerCards.forEach((playerCard) => {
         if (playerCard.innerHTML == cardElement.innerHTML) {
             playerCard.remove();
@@ -85,51 +89,36 @@ playerCards.forEach((card) => {
     card.addEventListener('click', handleCardClick);
 });
 
-// // Function to switch suit indicator colors
-// function switchSuitColors(event) {
-//     const indicator = event.target;
-//     const currentColor = Array.from(indicator.classList).find(cls => cls.startsWith('color-'));
-//     let nextColor = parseInt(currentColor.split('-')[1]) % 3 + 1;
-//     indicator.classList.remove(currentColor);
-//     indicator.classList.add(`color-${nextColor}`);
-// }
+const countSpadesElement = document.getElementById('countSpades');
+const countHeartsElement = document.getElementById('countHearts');
+const countClubsElement = document.getElementById('countClubs');
+const countDiamondsElement = document.getElementById('countDiamonds');
 
-// // Add click event listeners to suit indicators
-// const suitIndicators = document.querySelectorAll('.suit-indicator div');
-// suitIndicators.forEach((indicator) => {
-//     indicator.addEventListener('click', switchSuitColors);
-// });
-
-
-
-// const suitColumns = document.querySelectorAll('.suit-column');
-
-// suitColumns.forEach((suitColumn) => {
-//     const playerColorIndicators = suitColumn.nextElementSibling.querySelectorAll('.color-indicator');
-//     let colors = ['color-1', 'color-2', 'color-3'];
-//     let colorIndex = 0;
-
-//     playerColorIndicators.forEach((indicator) => {
-//         indicator.addEventListener('click', () => {
-//             indicator.classList.remove(colors[colorIndex]);
-//             colorIndex = (colorIndex + 1) % colors.length;
-//             indicator.classList.add(colors[colorIndex]);
-
-//             // Call a function to synchronize colors across all players for the same suit
-//             synchronizeColors(suitColumn.classList[1], colors[colorIndex]);
-//         });
-//     });
-// });
-
-// // Function to synchronize indicator colors for the same suit across all players
-// function synchronizeColors(suitType, color) {
-//     const suitColumns = document.querySelectorAll(`.${suitType}`);
-
-//     suitColumns.forEach((column) => {
-//         const playerColorIndicators = column.nextElementSibling.querySelectorAll('.color-indicator');
-//         playerColorIndicators.forEach((indicator) => {
-//             indicator.classList.remove('color-3', 'color-2', 'color-1');
-//             indicator.classList.add(color);
-//         });
-//     });
-// }
+function toggleButtonHighlight(element) {
+    // Toggle the highlighting class (e.g., 'highlighted') on manual click
+  if (element.classList.contains('highlighted')) {
+    element.classList.remove('highlighted');
+    element.classList.remove('noHighlight');
+    element.classList.add('highlighted1');
+  } else if (element.classList.contains('highlighted1')) {
+    element.classList.remove('highlighted');
+    element.classList.remove('highlighted1');
+    element.classList.add('noHighlight');
+  } else {
+    element.classList.remove('noHighlight');
+    element.classList.remove('highlighted1');
+    element.classList.add('highlighted');
+  }
+}
+countSpadesElement.addEventListener('click', function () {
+  toggleButtonHighlight(this);
+});
+countHeartsElement.addEventListener('click', function () {
+  toggleButtonHighlight(this);
+});
+countClubsElement.addEventListener('click', function () {
+  toggleButtonHighlight(this);
+});
+countDiamondsElement.addEventListener('click', function () {
+  toggleButtonHighlight(this);
+});
