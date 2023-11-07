@@ -97,16 +97,13 @@ const countDiamondsElement = document.getElementById('countDiamonds');
 function toggleButtonHighlight(element) {
     // Toggle the highlighting class (e.g., 'highlighted') on manual click
   if (element.classList.contains('highlighted')) {
-    element.classList.remove('highlighted');
-    element.classList.remove('noHighlight');
+    element.classList.remove('highlighted', 'noHighlight');
     element.classList.add('highlighted1');
   } else if (element.classList.contains('highlighted1')) {
-    element.classList.remove('highlighted');
-    element.classList.remove('highlighted1');
+    element.classList.remove('highlighted','highlighted1');
     element.classList.add('noHighlight');
   } else {
-    element.classList.remove('noHighlight');
-    element.classList.remove('highlighted1');
+    element.classList.remove('noHighlight','highlighted1');
     element.classList.add('highlighted');
   }
 }
@@ -122,3 +119,57 @@ countClubsElement.addEventListener('click', function () {
 countDiamondsElement.addEventListener('click', function () {
   toggleButtonHighlight(this);
 });
+
+const hiddenCardsHistory = [];
+function hideCard(cardElement) {
+    const commonClass = 'card';
+    const playerCards = document.querySelectorAll(`.${commonClass}`);
+  
+    // Record the hidden card information
+    const hiddenCardInfo = {
+      cardElement: cardElement.cloneNode(true),
+      suitColumn: cardElement.parentElement,
+    };
+    hiddenCardsHistory.push(hiddenCardInfo);
+  
+    // Update suit count
+    if (cardElement.innerHTML.includes('♠')) {
+      countSpades.innerHTML = countSpades.innerHTML - 1;
+    } else if (cardElement.innerHTML.includes('♥')) {
+      countHearts.innerHTML = countHearts.innerHTML - 1;
+    } else if (cardElement.innerHTML.includes('♣')) {
+      countClubs.innerHTML = countClubs.innerHTML - 1;
+    } else {
+      countDiamonds.innerHTML = countDiamonds.innerHTML - 1;
+    }
+  
+    // Remove the card from the player's hand
+    playerCards.forEach((playerCard) => {
+      if (playerCard.innerHTML === cardElement.innerHTML) {
+        playerCard.remove();
+      }
+    });
+  }
+  const undoButton = document.getElementById('undoButton');
+
+  undoButton.addEventListener('click', function () {
+    if (hiddenCardsHistory.length > 0) {
+      const lastHiddenCardInfo = hiddenCardsHistory.pop();
+      const { cardElement, suitColumn } = lastHiddenCardInfo;
+  
+      // Restore the hidden card to the player's hand
+      suitColumn.appendChild(cardElement);
+  
+      // Update suit count
+      if (cardElement.innerHTML.includes('♠')) {
+        countSpades.innerHTML = Number(countSpades.innerHTML) + 1;
+      } else if (cardElement.innerHTML.includes('♥')) {
+        countHearts.innerHTML = Number(countHearts.innerHTML) + 1;
+      } else if (cardElement.innerHTML.includes('♣')) {
+        countClubs.innerHTML = Number(countClubs.innerHTML) + 1;
+      } else {
+        countDiamonds.innerHTML = Number(countDiamonds.innerHTML) + 1;
+      }
+    }
+  });
+    
