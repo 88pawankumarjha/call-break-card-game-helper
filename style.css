@@ -14,38 +14,40 @@ header {
 
 main {
     display: flex;
-    justify-content: space-around;
-    padding: 1rem;
+    justify-content: space-between;
 }
 
 .player {
-    border: 2px solid #333;
-    border-radius: 5px;
+    width: 23%; /* Adjust the width as needed */
     background-color: #fff;
-    padding: 1rem;
     text-align: center;
-    width: 150px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    margin: 1rem;
+    padding: 1rem;
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 1rem;
+    min-height: 75vh;
+    gap: 1px; /* Adjust the gap between cards */
+    margin-top: 0.5rem;
+    flex-grow: 1; /* Allow cards to grow to fill available space */
+    flex-basis: 20%; /* Four columns for each player */
 }
 
 .card {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 3px;
-    padding: 0.5rem;
+    padding: 1vh 0.2rem;
+    margin: 0.5rem 0;
     text-align: center;
-    min-width: 50px;
+    min-width: 30px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    font-size: 12px;
+    flex: 1; /* Cards take up available space */
+    
 }
 
 .card:hover {
@@ -60,3 +62,29 @@ main {
 .black-suit {
     color: black;
 }
+
+/* 
+.suit-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+}
+
+.suit-indicator div {
+    width: 30px;
+    height: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.suit-indicator .color-1 {
+    background-color: red;
+}
+
+.suit-indicator .color-2 {
+    background-color: blue;
+}
+
+.suit-indicator .color-3 {
+    background-color: green;
+} */

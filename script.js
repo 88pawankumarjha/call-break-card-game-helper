@@ -1,38 +1,3 @@
-// // Define the card deck
-// const cardDeck = [];
-
-// const suits = ['♠', '♥', '♣', '♦'];
-// const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-
-// // Create the deck by combining suits and ranks
-// suits.forEach((suit) => {
-//     ranks.forEach((rank) => {
-//         cardDeck.push({ suit, rank });
-//     });
-// });
-
-// console.log(cardDeck); // Display the deck in the console (optional)
-
-
-
-// // Shuffle the card deck (implement a shuffle function)
-
-// // Distribute cards among players
-// const players = document.querySelectorAll('.player');
-// players.forEach((player, index) => {
-//     // Distribute cards to each player
-//     const playerCards = cardDeck.slice(index * 13, (index + 1) * 13);
-
-//     // Create and display the player's cards
-//     const cardContainer = player.querySelector('.card-container');
-//     playerCards.forEach((card) => {
-//         const cardElement = document.createElement('div');
-//         cardElement.classList.add('card');
-//         cardElement.textContent = `${card.rank} ${card.suit}`;
-//         cardContainer.appendChild(cardElement);
-//     });
-// });
-
 // Define the full deck of cards
 const fullDeck = [];
 
@@ -62,33 +27,41 @@ function appendCardsToContainer(playerIndex, cards) {
     const containerId = `player${playerIndex + 1}-cards`;
     const cardContainer = document.getElementById(containerId);
 
-    cards.forEach((card) => {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
-        
-        // Check the card's suit and set the text color accordingly
-        if (card.suit === '♠' || card.suit === '♣') {
-            cardElement.classList.add('black-suit');
-        } else {
-            cardElement.classList.add('red-suit');
-        }
+    const suits = ['♠', '♥', '♣', '♦'];
 
-        cardElement.textContent = `${card.rank} ${card.suit}`;
-        cardContainer.appendChild(cardElement);
+    suits.forEach((suit) => {
+        const suitCards = cards.filter((card) => card.suit === suit);
+        if (suitCards.length > 0) {
+            const suitColumn = document.createElement('div');
+            suitColumn.classList.add('suit-column');
+
+            suitCards.forEach((card) => {
+                const cardElement = document.createElement('div');
+                cardElement.classList.add('card');
+
+                // Check the card's suit and set the text color accordingly
+                if (card.suit === '♠' || card.suit === '♣') {
+                    cardElement.classList.add('black-suit');
+                } else {
+                    cardElement.classList.add('red-suit');
+                }
+
+                cardElement.textContent = `${card.rank} ${card.suit}`;
+                suitColumn.appendChild(cardElement);
+            });
+
+            cardContainer.appendChild(suitColumn);
+        }
     });
 }
+
 
 // Append the cards to each player's container
 playerHands.forEach((playerHand, index) => {
     appendCardsToContainer(index, playerHand);
 });
 
-function moveCardToDiscardAndUpdatePlayer(cardElement, playerIndex) {
-    const discardPile = document.getElementById('discard-pile');
-
-    // Clone the card element to add to the discard pile
-    const discardedCard = cardElement.cloneNode(true);
-
+function hideCard(cardElement) {
     // Select and remove all cards with the common class from all players
     const commonClass = 'card';
     const playerCards = document.querySelectorAll(`.${commonClass}`);
@@ -97,21 +70,13 @@ function moveCardToDiscardAndUpdatePlayer(cardElement, playerIndex) {
             playerCard.remove();
         }
     });
-
-    // Append the cloned card to the discard pile
-    discardPile.appendChild(discardedCard);
 }
-
-
-
 
 // Function to handle card click
 function handleCardClick(event) {
     const cardElement = event.target;
-    const playerIndex = cardElement.getAttribute('data-player');
-
-    // Move the clicked card to the discard pile and update the player's hand
-    moveCardToDiscardAndUpdatePlayer(cardElement, playerIndex);
+    // const playerIndex = cardElement.getAttribute('data-player');
+    hideCard(cardElement);
 }
 
 // Add click event listeners to all cards in player hands
@@ -119,3 +84,18 @@ const playerCards = document.querySelectorAll('.card');
 playerCards.forEach((card) => {
     card.addEventListener('click', handleCardClick);
 });
+
+// // Function to switch suit indicator colors
+// function switchSuitColors(event) {
+//     const indicator = event.target;
+//     const currentColor = Array.from(indicator.classList).find(cls => cls.startsWith('color-'));
+//     let nextColor = parseInt(currentColor.split('-')[1]) % 3 + 1;
+//     indicator.classList.remove(currentColor);
+//     indicator.classList.add(`color-${nextColor}`);
+// }
+
+// // Add click event listeners to suit indicators
+// const suitIndicators = document.querySelectorAll('.suit-indicator div');
+// suitIndicators.forEach((indicator) => {
+//     indicator.addEventListener('click', switchSuitColors);
+// });
